@@ -1,5 +1,6 @@
 package com.suggestionapp;
 
+import com.suggestionapp.utilities.StringHelper;
 import junit.framework.Assert;
 import org.junit.Test;
 import com.suggestionapp.entities.City;
@@ -86,6 +87,21 @@ public class SearchTest {
         Map<City, Double> result = SearchHelper.search("SomeNonExistentCityName", null, null);
 
         Assert.assertEquals("Should not find any hit for city name \"SomeNonExistentCityName\"", result.size(), 0);
+    }
+
+    @Test
+    public void TestSearchHelper_SearchString(){
+        Map<City, Double> result = SearchHelper.search("quebec", 43.70011, -79.4163);
+        Assert.assertEquals(result.size(), 1);
+        for (Map.Entry<City, Double> entry : result.entrySet()) {
+             Assert.assertEquals(entry.getKey().getName(), "quebec");
+        }
+    }
+
+    @Test
+    public void TestSearchHelper_StringNormalize(){
+        String result = StringHelper.normalize("QuéBEC");
+        Assert.assertEquals("Expected: quebec", "quebec", result);
     }
 
 }

@@ -7,8 +7,6 @@ import java.util.regex.Pattern;
  * Helper class containing useful methods related to strings.
  */
 public class StringHelper {
-    public static final Pattern DIACRITICS_AND_FRIENDS
-            = Pattern.compile("[\\p{InCombiningDiacriticalMarks}\\p{IsLm}\\p{IsSk}]+");
 
     /**
      * Helper method to normalize a string.
@@ -28,8 +26,9 @@ public class StringHelper {
      * @return
      */
     public static String removeDiacritics(String inputString){
-        String result = Normalizer.normalize(inputString, Normalizer.Form.NFD);
-        result = DIACRITICS_AND_FRIENDS.matcher(inputString).replaceAll("");
+        String result = Normalizer
+                .normalize(inputString, Normalizer.Form.NFD)
+                .replaceAll("[^\\p{ASCII}]", "");
 
         return result;
     }

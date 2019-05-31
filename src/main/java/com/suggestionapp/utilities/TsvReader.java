@@ -8,9 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * This class is used to read the TSV file and extract the city information to store in an array.
@@ -120,7 +118,7 @@ public class TsvReader {
      * @return search index map
      */
     private static Map<String, Integer> buildSearchIndex(City[] sortedCities){
-        HashMap<String, Integer> searchIndex = new HashMap<>();
+        SortedMap<String, Integer> searchIndex = new TreeMap<>();
 
         System.out.print("\nThere are " + sortedCities.length + " Cities.");
 
